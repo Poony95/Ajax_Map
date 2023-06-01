@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+// 날짜별 날씨 정보를 출력하도록 코드를 완성 해 봅니다.
+// 06/02 오전 : 맑음
+// 06/02 오후 : 흐림
+// ...
+$(function(){	
+	$.ajax({
+		url:"http://apis.data.go.kr/1360000/VilageFcstMsgService/getLandFcst?serviceKey=dEAjcRng1q%2BZ8dnzPqxxWvPPado8097gcy9fpyiiGvXhxQVB6hAtzJjHN%2Fpk%2FzkFhI3EstFkhL9tHe08MzzIxg%3D%3D&numOfRows=10&pageNo=1&regId=11B10101",
+		success:function(data){
+			var arr = $(data).find("item");			
+			var date = $(arr[0]).find("announceTime").text();
+			console.log(date);
+			//2023 06 01 1100
+			var month = eval(date.substr(4,2));
+			var day = eval(date.substr(6,2));	
+			var time = eval(date.substr(8,2));	
+			
+			var date_arr = [];
+			for(i=day; i <= day+5; i++){
+				date_arr.push(month+"월"+i+"일 오전");
+				date_arr.push(month+"월"+i+"일 오후");
+			}
+			if(time < 5){
+				start = 0;
+			}else{
+				start = 1; 
+			}
+						
+			//console.log(month,day,time);
+			var n = start;
+			$.each(arr, function(){
+				var wf = $(this).find("wf").text();
+				var p = $("<p></p>").html(date_arr[n] + "==>" + wf);
+				n++;
+				$("#wrap").append(p);
+			});
+			
+			
+		}
+	})
+});
+</script>
+</head>
+<body>
+	<div id="wrap"></div>
+</body>
+</html>

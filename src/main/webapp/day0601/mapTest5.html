@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도 생성하기</title>
+<style type="text/css">
+	#map{
+		border: 1px solid pink;
+	}
+</style>    
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>    
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04921855b487c340c8afad2f5c1800c5"></script>
+<script type="text/javascript">
+$(function(){
+	mapOption = {
+		center:new kakao.maps.LatLng(37.556755, 126.919527),
+		level:3
+	};
+	//var mapContainer = $("#map");
+	var mapContainer = document.getElementById("map");
+	var map;
+	
+	$("#btnShow").click(function(){
+		map = new kakao.maps.Map(mapContainer,mapOption );
+	})
+	
+	$("#btnHalla").click(function(){
+		var center = new kakao.maps.LatLng(33.363098,126.529510);
+		map.setCenter(center);
+	});
+	
+	$("#btnHalla2").click(function(){
+		var center = new kakao.maps.LatLng(33.363098,126.529510);
+		map.panTo(center);
+	});
+	
+	$("#btnCGV").click(function(){
+		var center = new kakao.maps.LatLng(37.558141, 126.922484);
+		map.setCenter(center);
+	});
+	
+	$("#btnCGV2").click(function(){
+		var center = new kakao.maps.LatLng(37.558141, 126.922484);
+		map.panTo(center);
+	});
+	
+});
+</script>    
+</head>
+<body>
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:80%;height:350px;"></div>
+<button id="btnShow">쌍용강북교육센터</button>
+<button id="btnHalla">제주도 한라산</button>
+<button id="btnHalla2">제주도 한라산 부드럽게</button>
+<button id="btnCGV">홍대 CGV</button>
+<button id="btnCGV2">홍대 CGV 부드럽게</button>
+</body>
+</html>
